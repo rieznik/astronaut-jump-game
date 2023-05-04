@@ -1,7 +1,19 @@
-import Phaser from "./lib/phaser.js";
+import Phaser from 'phaser'
 
-export default new Phaser.Game({
-  type: Phaser.AUTO,
-  width: 480,
-  height: 640,
-});
+import HelloWorldScene from './HelloWorldScene'
+
+const config = {
+	type: Phaser.AUTO,
+	parent: 'app',
+	width: 800,
+	height: 600,
+	physics: {
+		default: 'arcade',
+		arcade: {
+			gravity: { y: 200 },
+		},
+	},
+	scene: [HelloWorldScene],
+}
+
+export default new Phaser.Game(config)
