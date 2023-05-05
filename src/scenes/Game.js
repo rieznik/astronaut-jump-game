@@ -8,10 +8,10 @@ export default class Game extends Phaser.Scene {
   preload() {
     this.load.image("background", "public/images/bg_layer1.png");
     this.load.image("platform", "public/images/ground_grass.png");
+    this.load.image("bunny-stand", "public/images/bunny1_stand.png");
   }
   create() {
     this.add.image(240, 320, "background");
-    // this.physics.add.image(240, 320, "platform").setScale(0.5);
 
     const platforms = this.physics.add.staticGroup();
 
@@ -25,5 +25,11 @@ export default class Game extends Phaser.Scene {
       const body = platform.body;
       body.updateFromGameObject();
     }
+
+    const player = this.physics.add
+      .sprite(240, 320, "bunny-stand")
+      .setScale(0.5);
+
+    this.physics.add.collider(platforms, player);
   }
 }
