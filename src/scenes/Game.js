@@ -13,7 +13,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("bunny-stand", "public/images/bunny1_stand.png");
   }
   create() {
-    this.add.image(240, 320, "background");
+    this.add.image(240, 320, "background").setScrollFactor(1, 0);
 
     // Create random platforms
     this.platforms = this.physics.add.staticGroup();
