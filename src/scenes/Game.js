@@ -3,6 +3,7 @@ import Phaser from "phaser";
 export default class Game extends Phaser.Scene {
   platforms;
   player;
+  cursors;
   constructor() {
     super("game");
   }
@@ -11,6 +12,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("background", "public/images/bg_layer1.png");
     this.load.image("platform", "public/images/ground_grass.png");
     this.load.image("bunny-stand", "public/images/bunny1_stand.png");
+    this.cursors = this.input.keyboard.createCursorKeys();
   }
   create() {
     this.add.image(240, 320, "background").setScrollFactor(1, 0);
@@ -61,6 +63,16 @@ export default class Game extends Phaser.Scene {
 
     if (touchingDown) {
       this.player.setVelocityY(-300);
+    }
+
+    // move left and right
+    if (this.cursors.left.isDown && !touchingDown) {
+      this.player.setVelocityX(-200);
+    } else if (this.cursors.right.isDown && !touchingDown) {
+      this.player.setVelocityX(200);
+    } else {
+      // stop movement if not left or right
+      this.player.setVelocityX(0);
     }
   }
 }
