@@ -14,6 +14,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("bunny-stand", "public/images/bunny1_stand.png");
     this.cursors = this.input.keyboard.createCursorKeys();
   }
+
   create() {
     this.add.image(240, 320, "background").setScrollFactor(1, 0);
 
@@ -44,6 +45,9 @@ export default class Game extends Phaser.Scene {
 
     // follow the player
     this.cameras.main.startFollow(this.player);
+
+    // set the horizontal dead zone to 1.5x game width
+    this.cameras.main.setDeadzone(this.scale.width * 1.5);
   }
 
   update() {
