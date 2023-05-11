@@ -4,6 +4,7 @@ export default class Game extends Phaser.Scene {
   platforms;
   player;
   cursors;
+  platformsPassed = 0;
   constructor() {
     super("game");
   }
@@ -77,6 +78,17 @@ export default class Game extends Phaser.Scene {
     } else {
       // stop movement if not left or right
       this.player.setVelocityX(0);
+    }
+    // wrap player horizontally (move through sides)
+    this.horizontalWrap(this.player);
+  }
+  horizontalWrap(sprite) {
+    const halfWidth = sprite.displayWidth * 0.5;
+    const gameWidth = this.scale.width;
+    if (sprite.x < -halfWidth) {
+      sprite.x = gameWidth + halfWidth;
+    } else if (sprite.x > gameWidth + halfWidth) {
+      sprite.x = -halfWidth;
     }
   }
 }
