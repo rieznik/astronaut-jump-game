@@ -1,6 +1,6 @@
-# [Astronaut Jump Game](https://rieznik.github.io/doodle-jump-like-game/)
+# Astronaut Jump Game
 
-🔗 [Astronaut Jump Game on GitHub Pages](https://rieznik.github.io/doodle-jump-like-game/)
+🔗 [Astronaut Jump Game on GitHub Pages](https://rieznik.github.io/astronaut-jump-game/)
 
 ## Build with [Phaser 3 + Vite.js Template](https://github.com/ourcade/phaser3-typescript-vite-template)
 
