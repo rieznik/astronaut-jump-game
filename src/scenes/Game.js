@@ -13,10 +13,10 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("background", "public/images/bg_layer1.png");
-    this.load.image("platform", "public/images/platform.png");
-    this.load.image("player-right", "public/images/player-right.png");
-    this.load.image("player-left", "public/images/player-left.png");
+    this.load.image("background", "images/bg_layer1.png");
+    this.load.image("platform", "images/platform.png");
+    this.load.image("player-right", "images/player-right.png");
+    this.load.image("player-left", "images/player-left.png");
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
