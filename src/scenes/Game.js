@@ -91,9 +91,7 @@ export default class Game extends Phaser.Scene {
 
         // Increment platform counter when a new platform is passed
         this.platformsPassed++;
-        this.platformsPassedText.setText(
-          `Platforms Passed: ${this.platformsPassed}`
-        ); // update text
+        this.platformsPassedText.setText(`Current: ${this.platformsPassed}`); // update text
 
         // Increase the counter of passed platforms and update the highest score if necessary
         if (this.platformsPassed > this.highestScore) {
