@@ -5,6 +5,7 @@ export default class Game extends Phaser.Scene {
   player;
   cursors;
   platformsPassed = 0;
+  platformsPassedText;
   constructor() {
     super("game");
   }
@@ -49,6 +50,14 @@ export default class Game extends Phaser.Scene {
 
     // set the horizontal dead zone to 1.5x game width
     this.cameras.main.setDeadzone(this.scale.width * 1.5);
+
+    // Create text to display platforms passed
+    this.platformsPassedText = this.add.text(16, 16, "Platforms Passed: 0", {
+      fontSize: "24px",
+      fill: "#000",
+    });
+    this.platformsPassed = 0;
+    this.platformsPassedText.setScrollFactor(0); // make it fixed to the screen
   }
 
   update() {
@@ -60,6 +69,12 @@ export default class Game extends Phaser.Scene {
       if (platform.y >= scrollY + 700) {
         platform.y = scrollY - Phaser.Math.Between(50, 100);
         platform.body.updateFromGameObject();
+
+        // Increment platform counter when a new platform is passed
+        this.platformsPassed++;
+        this.platformsPassedText.setText(
+          `Platforms Passed: ${this.platformsPassed}`
+        ); // update text
       }
     });
 
