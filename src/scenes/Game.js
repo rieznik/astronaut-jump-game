@@ -14,14 +14,14 @@ export default class Game extends Phaser.Scene {
 
   preload() {
     this.load.image("background", "public/images/bg_layer1.png");
-    this.load.image("platform", "public/images/ground_grass.png");
-    this.load.image("bunny-stand", "public/images/bunny1_stand.png");
+    this.load.image("platform", "public/images/platform.png");
+    this.load.image("player-right", "public/images/player-right.png");
+    this.load.image("player-left", "public/images/player-left.png");
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   create() {
     const width = this.scale.width;
-    const height = this.scale.height;
     this.add.image(240, 320, "background").setScrollFactor(1, 0);
 
     // Create random platforms
@@ -32,7 +32,7 @@ export default class Game extends Phaser.Scene {
       const y = 150 * i;
 
       const platform = this.platforms.create(x, y, "platform");
-      platform.scale = 0.5;
+      platform.scale = 0.35;
 
       const body = platform.body;
       body.updateFromGameObject();
@@ -40,7 +40,7 @@ export default class Game extends Phaser.Scene {
 
     // Add a player and make it jump when landing
     this.player = this.physics.add
-      .sprite(240, 320, "bunny-stand")
+      .sprite(240, 320, "player-right")
       .setScale(0.5);
 
     this.physics.add.collider(this.platforms, this.player);
@@ -65,7 +65,7 @@ export default class Game extends Phaser.Scene {
       `Max: ${this.highestScore}`,
       {
         fontSize: "24px",
-        fill: "red",
+        fill: "#ca3cff",
       }
     );
     this.highestScoreText.setScrollFactor(0);
@@ -73,7 +73,7 @@ export default class Game extends Phaser.Scene {
     // Create text to display platforms passed
     this.platformsPassedText = this.add.text(16, 16, "Current: 0", {
       fontSize: "24px",
-      fill: "#000",
+      fill: "#386641",
     });
     this.platformsPassed = 0;
     this.platformsPassedText.setScrollFactor(0); // make it fixed to the screen
@@ -105,14 +105,16 @@ export default class Game extends Phaser.Scene {
     const touchingDown = this.player.body.touching.down;
 
     if (touchingDown) {
-      this.player.setVelocityY(-300);
+      this.player.setVelocityY(-1080);
     }
 
     // move left and right
     if (this.cursors.left.isDown && !touchingDown) {
       this.player.setVelocityX(-200);
+      this.player.setTexture("player-left");
     } else if (this.cursors.right.isDown && !touchingDown) {
       this.player.setVelocityX(200);
+      this.player.setTexture("player-right");
     } else {
       // stop movement if not left or right
       this.player.setVelocityX(0);
