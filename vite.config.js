@@ -4,5 +4,5 @@ export default defineConfig({
   plugins: [],
   server: { host: "0.0.0.0", port: 8000 },
   clearScreen: false,
-  base: "/doodle-jump-like-game/",
+  base: "/astronaut-jump-game/",
 });
