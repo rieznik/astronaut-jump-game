@@ -6,6 +6,8 @@ export default class Game extends Phaser.Scene {
   cursors;
   platformsPassed = 0;
   platformsPassedText;
+  highestScore = 0;
+  highestScoreText;
   constructor() {
     super("game");
   }
@@ -18,6 +20,8 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    const width = this.scale.width;
+    const height = this.scale.height;
     this.add.image(240, 320, "background").setScrollFactor(1, 0);
 
     // Create random platforms
@@ -51,8 +55,23 @@ export default class Game extends Phaser.Scene {
     // set the horizontal dead zone to 1.5x game width
     this.cameras.main.setDeadzone(this.scale.width * 1.5);
 
+    // Load the highest score from localStorage
+    this.highestScore = localStorage.getItem("highestScore") || 0;
+
+    // Add the highest score text to the screen
+    this.highestScoreText = this.add.text(
+      width / 2,
+      16,
+      `Max: ${this.highestScore}`,
+      {
+        fontSize: "24px",
+        fill: "red",
+      }
+    );
+    this.highestScoreText.setScrollFactor(0);
+
     // Create text to display platforms passed
-    this.platformsPassedText = this.add.text(16, 16, "Platforms Passed: 0", {
+    this.platformsPassedText = this.add.text(16, 16, "Current: 0", {
       fontSize: "24px",
       fill: "#000",
     });
@@ -75,6 +94,12 @@ export default class Game extends Phaser.Scene {
         this.platformsPassedText.setText(
           `Platforms Passed: ${this.platformsPassed}`
         ); // update text
+
+        // Increase the counter of passed platforms and update the highest score if necessary
+        if (this.platformsPassed > this.highestScore) {
+          this.highestScore = this.platformsPassed;
+          localStorage.setItem("highestScore", this.highestScore);
+        }
       }
     });
 
